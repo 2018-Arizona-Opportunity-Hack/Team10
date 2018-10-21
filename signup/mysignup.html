@@ -141,7 +141,7 @@
           v-show="form.gradYear!=='' && isInvalid.gradYear"
         >graduation year is invalid</mark>
       </fieldset>
-      <button :disabled="isInvalidForm">submit</button>
+      <button :disabled="isInvalidForm" @click="submit()">submit</button>
     </div>
     <div style="flex: 1;">
       <pre>
@@ -156,6 +156,18 @@
 <script>
   new Vue({
     el: '#app',
+    methods: {
+      submit: function(){
+        console.log('bla');
+        let url = 'https://bla.com';
+        fetch(url, {
+          method: 'POST'
+        })
+          .then(()=>{
+
+          });
+      }
+    },
     watch: {
       form: {
         deep: true,
