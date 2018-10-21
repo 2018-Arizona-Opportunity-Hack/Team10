@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>simple</title>
+
+  <style scoped>
+    h1, h2 {
+      font-weight: normal;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      display: inline-block;
+      margin: 0 10px;
+    }
+
+    a {
+      color: #35495E;
+    }
+
+    input, select {
+      padding: 2px 5px;
+      box-sizing: content-box;
+      border: 1px solid #b7b7b7;
+      color: #000000;
+      float: left;
+      height: 26px;
+      width: 180px;
+      -webkit-appearance: textfield;
+      background-color: white;
+      -webkit-rtl-ordering: logical;
+      cursor: text;
+      text-rendering: auto;
+      letter-spacing: normal;
+      word-spacing: normal;
+      text-transform: none;
+      text-indent: 0px;
+      text-shadow: none;
+      display: inline-block;
+      text-align: start;
+      margin: 0em;
+    }
+
+    button[disabled] {
+      color: grey;
+      background: red;
+    }
+
+    button {
+      border-radius: 5px;
+      color: #000000;
+      font-size: 20px;
+      font-weight: bold;
+      background: #00EFC5;
+      padding: 20px 25px 20px 25px;
+      text-decoration: none;
+      width: 90%;
+      margin: 0 0 0 15px;
+      transition: all .2s ease-in-out;
+      box-shadow: 0px 0px 0px #2a2a2a;
+
+      align-items: flex-start;
+      text-align: center;
+      cursor: default;
+
+      border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
+      border-style: solid;
+      border-width: 1px;
+
+      letter-spacing: normal;
+      word-spacing: normal;
+      text-transform: none;
+      text-indent: 0px;
+      text-shadow: none;
+      display: inline-block;
+    }
+
+  </style>
+
+</head>
+<body>
+<noscript>
+  This is your fallback content in case JavaScript fails to load.
+</noscript>
+<div id="app">
+  <main style="display: flex; flex-direction: row;">
+    <div style="flex: 1;">
+      <fieldset>
+        <input placeholder="First Name" v-model="form.firstName" type="text">
+        <label>first name</label>
+        <mark
+          v-show="form.firstName!=='' && isInvalid.firstName"
+        >first name is invalid</mark>
+      </fieldset>
+      <fieldset>
+        <input placeholder="Last Name" v-model="form.lastName" type="text">
+        <label>last name</label>
+        <mark
+          v-show="form.lastName!=='' && isInvalid.lastName"
+        >last name is invalid</mark>
+      </fieldset>
+      <fieldset>
+        <input placeholder="phone number" v-model="form.phone" type="text">
+        <label>phone number</label>
+        <mark
+          v-show="form.phone!=='' && isInvalid.phone"
+        >phone is invalid</mark>
+      </fieldset>
+      <fieldset>
+        <input placeholder="email" v-model="form.email" type="email">
+        <label>email</label>
+        <mark
+          v-show="form.email!=='' && isInvalid.email"
+        >email is invalid</mark>
+      </fieldset>
+      <fieldset>
+        <input placeholder="school" v-model="form.school" type="text">
+        <label>school</label>
+        <mark
+          v-show="form.school!=='' && isInvalid.school"
+        >school is invalid</mark>
+      </fieldset>
+      <fieldset>
+        <input placeholder="date of birth" v-model="form.dob" type="date" max="2018-10-20">
+        <label>date of birth</label>
+        <mark
+          v-show="form.dob!=='' && isInvalid.dob"
+        >date of birth is invalid</mark>
+      </fieldset>
+      <fieldset>
+        <input placeholder="graduation year" v-model="form.gradYear" type="number">
+        <label>graduation year</label>
+        <mark
+          v-show="form.gradYear!=='' && isInvalid.gradYear"
+        >graduation year is invalid</mark>
+      </fieldset>
+      <button :disabled="isInvalidForm">submit</button>
+    </div>
+    <div style="flex: 1;">
+      <pre>
+        {{ $data }}
+      </pre>
+    </div>
+
+  </main>
+
+</div>
+<script src="https://unpkg.com/vue@2.5.17/dist/vue.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    watch: {
+      form: {
+        deep: true,
+        handler: function (form) {
+
+          let validForm = true;
+
+          if( /[a-z]{2,30}/i.test(form.firstName) ){
+            this.$data.isInvalid.firstName=false;
+          } else {
+            this.$data.isInvalid.firstName=true;
+            validForm = false;
+          }
+
+          if( /[a-z]{2,30}/i.test(form.lastName) ){
+            this.$data.isInvalid.lastName=false;
+          } else {
+            this.$data.isInvalid.lastName=true;
+            validForm = false;
+          }
+
+          if( /[0-9]{10}/.test(form.phone) ){
+            this.$data.isInvalid.phone=false;
+          } else {
+            this.$data.isInvalid.phone=true;
+            validForm = false;
+          }
+
+          if( /^.+\@.+$/i.test(form.email) ){
+            this.$data.isInvalid.email=false;
+          } else {
+            this.$data.isInvalid.email=true;
+            validForm = false;
+          }
+
+          if( /^\w+$/i.test(form.school) ){
+            this.$data.isInvalid.school=false;
+          } else {
+            this.$data.isInvalid.school=true;
+            validForm = false;
+          }
+
+          if( /^\d+$/i.test(form.gradYear) ){
+            this.$data.isInvalid.gradYear=false;
+          } else {
+            this.$data.isInvalid.gradYear=true;
+            validForm = false;
+          }
+
+          if( /^\d{4}\-\d{2}\-\d{2}$/i.test(form.dob) ){
+            this.$data.isInvalid.dob=false;
+          } else {
+            this.$data.isInvalid.dob=true;
+            validForm = false;
+          }
+
+          if(validForm) {
+            this.$data.isInvalidForm=false;
+          } else {
+            this.$data.isInvalidForm=true;
+          }
+        }
+      }
+    },
+    data () {
+      return {
+        isInvalidForm: true,
+        isInvalid: {
+          firstName: null,
+          lastName: null,
+          phone: null,
+          dob: null,
+          gradYear: null,
+          email: null
+        },
+        form: {
+          firstName: '',
+          lastName: '',
+          phone: '',
+          dob: '',
+          school:'',
+          gradYear: '',
+          email: ''
+        }
+      }
+    }
+  })
+</script>
+</body>
+</html>
