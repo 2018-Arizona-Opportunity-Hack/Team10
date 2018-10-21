@@ -49,8 +49,8 @@
     }
 
     button[disabled] {
-      color: grey;
-      background: red;
+      color: white;
+      background: steelblue;
     }
 
     button {
@@ -61,8 +61,8 @@
       background: #00EFC5;
       padding: 20px 25px 20px 25px;
       text-decoration: none;
-      width: 90%;
-      margin: 0 0 0 15px;
+      width: 80%;
+      margin: 0 0 0 30px;
       transition: all .2s ease-in-out;
       box-shadow: 0px 0px 0px #2a2a2a;
 
@@ -91,69 +91,72 @@
 </noscript>
 <div id="app">
   <main style="display: flex; flex-direction: column;">
-    <div><h1>signup</h1></div>
+    <div><h1>Sign up Volunteer</h1></div>
     <div style="flex: 1;">
       <fieldset>
-        <label>first name</label>
-        <div>
-          <input placeholder="First Name" v-model="form.firstName" type="text">
-        </div>
-        <div>
-        <mark
-          v-show="form.firstName!=='' && isInvalid.firstName"
-        >first name is invalid</mark>
-        </div>
+        <input placeholder="First Name" v-model="form.firstName" type="text">
+        <label>First Name</label>
+        <mark v-show="form.firstName!=='' && isInvalid.firstName">First Name is invalid</mark>
       </fieldset>
       <fieldset>
         <input placeholder="Last Name" v-model="form.lastName" type="text">
-        <label>last name</label>
-        <mark
-          v-show="form.lastName!=='' && isInvalid.lastName"
-        >last name is invalid</mark>
+        <label>Last Name</label>
+        <mark v-show="form.lastName!=='' && isInvalid.lastName">Last Name is invalid</mark>
       </fieldset>
       <fieldset>
-        <input placeholder="phone number" v-model="form.phone" type="text">
-        <label>phone number</label>
-        <mark
-          v-show="form.phone!=='' && isInvalid.phone"
-        >phone is invalid</mark>
+        <input placeholder="Phone Number" v-model="form.phone" type="number">
+        <label>Phone Number</label>
+        <mark v-show="form.phone!=='' && isInvalid.phone">Phone Number is invalid</mark>
       </fieldset>
       <fieldset>
-        <input placeholder="email" v-model="form.email" type="email">
-        <label>email</label>
-        <mark
-          v-show="form.email!=='' && isInvalid.email"
-        >email is invalid</mark>
+        <input placeholder="Email" v-model="form.email" type="email">
+        <label>Email</label>
+        <mark v-show="form.email!=='' && isInvalid.email">Email is invalid</mark>
       </fieldset>
       <fieldset>
-        <input placeholder="school" v-model="form.school" type="text">
-        <label>school</label>
-        <mark
-          v-show="form.school!=='' && isInvalid.school"
-        >school is invalid</mark>
+        <input placeholder="School" v-model="form.school" type="text">
+        <label>School</label>
+        <mark v-show="form.school!=='' && isInvalid.school">School is invalid</mark>
       </fieldset>
       <fieldset>
-        <input placeholder="date of birth" v-model="form.dob" type="date" max="2018-10-20">
-        <label>date of birth</label>
-        <mark
-          v-show="form.dob!=='' && isInvalid.dob"
-        >date of birth is invalid</mark>
+        <input placeholder="Date of Birth" v-model="form.dob" type="date" max="2018-10-20">
+        <label>Date of Birth</label>
+        <mark v-show="form.dob!=='' && isInvalid.dob">date of birth is invalid</mark>
       </fieldset>
       <fieldset>
-        <input placeholder="graduation year" v-model="form.gradYear" type="number">
-        <label>graduation year</label>
-        <mark
-          v-show="form.gradYear!=='' && isInvalid.gradYear"
-        >graduation year is invalid</mark>
+        <input placeholder="Graduation Year" v-model="form.grad_year" type="number">
+        <label>Graduation Year</label>
+        <mark v-show="form.grad_year!=='' && isInvalid.grad_year">Graduation Year is invalid</mark>
       </fieldset>
-      <button :disabled="isInvalidForm" @click="submit()">submit</button>
+      <fieldset>
+        <label>Availability Schedule</label>
+      </fieldset>
+      <fieldset>
+        <input type="checkbox" id="monday" v-model="checked">
+        <label for="checkbox">Swift Monday</label>
+      </fieldset>
+      <fieldset>
+        <input type="checkbox" id="wednesday" v-model="checked">
+        <label for="checkbox">Swift Wednesday</label>
+      </fieldset>
+      <fieldset>
+        <input type="checkbox" id="friday" v-model="checked">
+        <label for="checkbox">Swift Friday</label>
+      </fieldset>
+      <fieldset>
+        <input type="checkbox" id="saturday" v-model="checked">
+        <label for="checkbox">Swift Saturday</label>
+      </fieldset>
+      <fieldset>
+        <button :disabled="isInvalidForm" @click="submit()">Submit</button>
+      </fieldset>
     </div>
   </main>
 
 </div>
 <script src="https://unpkg.com/vue@2.5.17/dist/vue.js"></script>
 <script>
-  new Vue({
+new Vue({
     el: '#app',
     methods: {
       submit: function(){
@@ -209,10 +212,10 @@
             validForm = false;
           }
 
-          if( /^\d+$/i.test(form.gradYear) ){
-            this.$data.isInvalid.gradYear=false;
+          if( /[0-9]{10}/.test(form.phone) ){
+            this.$data.isInvalid.grad_year=false;
           } else {
-            this.$data.isInvalid.gradYear=true;
+            this.$data.isInvalid.grad_year=true;
             validForm = false;
           }
 
@@ -240,7 +243,7 @@
           phone: null,
           dob: null,
           gradYear: null,
-          email: null
+          email: null,
         },
         form: {
           firstName: '',
@@ -253,7 +256,6 @@
         }
       }
     }
-  })
-</script>
+  })</script>
 </body>
 </html>
