@@ -5,81 +5,66 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>simple</title>
-
-  <style scoped>
-    h1, h2 {
-      font-weight: normal;
+  <link href="grid.css" rel="stylesheet" type="text/css">
+  <style>
+    body {
+      font-family: Helvetica Neue, Arial, sans-serif;
+      font-size: 14px;
+      color: #444;
     }
 
-    ul {
-      list-style-type: none;
-      padding: 0;
+    table {
+      border: 2px solid #42b983;
+      border-radius: 3px;
+      background-color: #fff;
     }
 
-    li {
+    th {
+      background-color: #42b983;
+      color: rgba(255,255,255,0.66);
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    td {
+      background-color: #f9f9f9;
+    }
+
+    th, td {
+      min-width: 120px;
+      padding: 10px 20px;
+    }
+
+    th.active {
+      color: #fff;
+    }
+
+    th.active .arrow {
+      opacity: 1;
+    }
+
+    .arrow {
       display: inline-block;
-      margin: 0 10px;
+      vertical-align: middle;
+      width: 0;
+      height: 0;
+      margin-left: 5px;
+      opacity: 0.66;
     }
 
-    a {
-      color: #35495E;
+    .arrow.asc {
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-bottom: 4px solid #fff;
     }
 
-    input, select {
-      padding: 2px 5px;
-      box-sizing: content-box;
-      border: 1px solid #b7b7b7;
-      color: #000000;
-      float: left;
-      height: 26px;
-      width: 180px;
-      -webkit-appearance: textfield;
-      background-color: white;
-      -webkit-rtl-ordering: logical;
-      cursor: text;
-      text-rendering: auto;
-      letter-spacing: normal;
-      word-spacing: normal;
-      text-transform: none;
-      text-indent: 0px;
-      text-shadow: none;
-      display: inline-block;
-      text-align: start;
-      margin: 0em;
-    }
-
-    button[disabled] {
-      color: grey;
-      background: red;
-    }
-
-    button {
-      border-radius: 5px;
-      color: #000000;
-      font-size: 20px;
-      font-weight: bold;
-      background: #00EFC5;
-      padding: 20px 25px 20px 25px;
-      text-decoration: none;
-      width: 90%;
-      margin: 0 0 0 15px;
-      transition: all .2s ease-in-out;
-      box-shadow: 0px 0px 0px #2a2a2a;
-
-      align-items: flex-start;
-      text-align: center;
-      cursor: default;
-
-      border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
-      border-style: solid;
-      border-width: 1px;
-
-      letter-spacing: normal;
-      word-spacing: normal;
-      text-transform: none;
-      text-indent: 0px;
-      text-shadow: none;
-      display: inline-block;
+    .arrow.dsc {
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 4px solid #fff;
     }
 
   </style>
@@ -90,8 +75,17 @@
   This is your fallback content in case JavaScript fails to load.
 </noscript>
 <div id="app">
-  <main style="display: flex; flex-direction: column;">
-    <div><h1>signup</h1></div>
+  <main style="display: flex; flex-direction: row;">
+    <div id="demo" style="flex: 1;">
+      <form id="search">
+        Search <input name="query" v-model="searchQuery">
+      </form>
+      <demo-grid
+        :data="gridData"
+        :columns="gridColumns"
+        :filter-key="searchQuery">
+      </demo-grid>
+    </div>
     <div style="flex: 1;">
       <fieldset>
         <label>first name</label>
@@ -152,9 +146,15 @@
 
 </div>
 <script src="https://unpkg.com/vue@2.5.17/dist/vue.js"></script>
+<script src="grid.js"></script>
 <script>
-  new Vue({
+
+
+  let vm = new Vue({
     el: '#app',
+    components: {
+      Grid
+    },
     methods: {
       submit: function(){
         console.log('bla');
@@ -233,6 +233,40 @@
     },
     data () {
       return {
+        searchQuery: '',
+        gridColumns: ['firstName', 'lastName','phone','dob','gradYear','email'],
+        gridData: [
+          {
+            firstName: 'Chuck',
+            lastName: 'Norris',
+            phone: '234234234',
+            dob: '2010-20-20',
+            gradYear: 2010,
+            email: 'asdfasdf'
+          },
+          {
+            firstName: 'Bruce',
+            lastName: 'Lee',
+            phone: '234234234',
+            dob: '2010-20-20',
+            gradYear: 2010,
+            email: 'asdfasdf'
+          },
+          { firstName: 'Jackie',
+            lastName: 'Chan',
+            phone: '234234234',
+            dob: '2010-20-20',
+            gradYear: 2010,
+            email: 'asdfasdf'
+          },
+          { firstName: 'Jet',
+            lastName: 'Li',
+            dob: '2010-20-20',
+            gradYear: 2010,
+            email: 'asdfasdf'
+          }
+        ],
+
         isInvalidForm: true,
         isInvalid: {
           firstName: null,
