@@ -86,82 +86,83 @@
 
 </head>
 <body>
-<noscript>
-  This is your fallback content in case JavaScript fails to load.
-</noscript>
-<div id="app">
-  <main style="display: flex; flex-direction: column;">
-    <div><h1>Sign up Volunteer</h1></div>
-    <div style="flex: 1;">
-      <fieldset>
-        <input placeholder="First Name" v-model="form.firstName" type="text">
-        <label>First Name</label>
-        <mark v-show="form.firstName!=='' && isInvalid.firstName">First Name is invalid</mark>
-      </fieldset>
-      <fieldset>
-        <input placeholder="Last Name" v-model="form.lastName" type="text">
-        <label>Last Name</label>
-        <mark v-show="form.lastName!=='' && isInvalid.lastName">Last Name is invalid</mark>
-      </fieldset>
-      <fieldset>
-        <input placeholder="Phone Number" v-model="form.phone" type="number">
-        <label>Phone Number</label>
-        <mark v-show="form.phone!=='' && isInvalid.phone">Phone Number is invalid</mark>
-      </fieldset>
-      <fieldset>
-        <input placeholder="Email" v-model="form.email" type="email">
-        <label>Email</label>
-        <mark v-show="form.email!=='' && isInvalid.email">Email is invalid</mark>
-      </fieldset>
-      <fieldset>
-        <input placeholder="School" v-model="form.school" type="text">
-        <label>School</label>
-        <mark v-show="form.school!=='' && isInvalid.school">School is invalid</mark>
-      </fieldset>
-      <fieldset>
-        <input placeholder="Date of Birth" v-model="form.dob" type="date" max="2018-10-20">
-        <label>Date of Birth</label>
-        <mark v-show="form.dob!=='' && isInvalid.dob">date of birth is invalid</mark>
-      </fieldset>
-      <fieldset>
-        <input placeholder="Graduation Year" v-model="form.grad_year" type="number">
-        <label>Graduation Year</label>
-        <mark v-show="form.grad_year!=='' && isInvalid.grad_year">Graduation Year is invalid</mark>
-      </fieldset>
-      <fieldset>
-        <label>Availability Schedule</label>
-      </fieldset>
-      <fieldset>
-        <input type="checkbox" id="monday" v-model="checked">
-        <label for="checkbox">Swift Monday</label>
-      </fieldset>
-      <fieldset>
-        <input type="checkbox" id="wednesday" v-model="checked">
-        <label for="checkbox">Swift Wednesday</label>
-      </fieldset>
-      <fieldset>
-        <input type="checkbox" id="friday" v-model="checked">
-        <label for="checkbox">Swift Friday</label>
-      </fieldset>
-      <fieldset>
-        <input type="checkbox" id="saturday" v-model="checked">
-        <label for="checkbox">Swift Saturday</label>
-      </fieldset>
-      <fieldset>
-        <button :disabled="isInvalidForm" @click="submit()">Submit</button>
-      </fieldset>
-    </div>
-  </main>
-
-</div>
-<script src="https://unpkg.com/vue@2.5.17/dist/vue.js"></script>
-<script>
+  <noscript>
+    This is your fallback content in case JavaScript fails to load.
+  </noscript>
+  <div id="app">
+    <main style="display: flex; flex-direction: column;">
+      <div><h1>Sign up Volunteer</h1></div>
+      <div style="flex: 1;">
+        <fieldset>
+          <input placeholder="First Name" v-model="form.firstName" type="text">
+          <label>First Name</label>
+          <mark v-show="form.firstName!=='' && isInvalid.firstName">First Name is invalid</mark>
+        </fieldset>
+        <fieldset>
+          <input placeholder="Last Name" v-model="form.lastName" type="text">
+          <label>Last Name</label>
+          <mark v-show="form.lastName!=='' && isInvalid.lastName">Last Name is invalid</mark>
+        </fieldset>
+        <fieldset>
+          <input placeholder="Phone Number" v-model="form.phone" type="number">
+          <label>Phone Number</label>
+          <mark v-show="form.phone!=='' && isInvalid.phone">Phone Number is invalid</mark>
+        </fieldset>
+        <fieldset>
+          <input placeholder="Email" v-model="form.email" type="email">
+          <label>Email</label>
+          <mark v-show="form.email!=='' && isInvalid.email">Email is invalid</mark>
+        </fieldset>
+        <fieldset>
+          <input placeholder="School" v-model="form.school" type="text">
+          <label>School</label>
+          <mark v-show="form.school!=='' && isInvalid.school">School is invalid</mark>
+        </fieldset>
+        <fieldset>
+          <input placeholder="Date of Birth" v-model="form.dob" type="date" max="2018-10-20">
+          <label>Date of Birth</label>
+          <mark v-show="form.dob!=='' && isInvalid.dob">date of birth is invalid</mark>
+        </fieldset>
+        <fieldset>
+          <input placeholder="Graduation Year" v-model="form.grad_year" type="number">
+          <label>Graduation Year</label>
+          <mark v-show="form.grad_year!=='' && isInvalid.grad_year">Graduation Year is invalid</mark>
+        </fieldset>
+        <fieldset>
+          <label>Availability Schedule</label>
+        </fieldset>
+        <fieldset>
+          <input type="checkbox" id="monday" v-model="checked">
+          <label for="checkbox">Swift Monday</label>
+        </fieldset>
+        <fieldset>
+          <input type="checkbox" id="wednesday" v-model="checked">
+          <label for="checkbox">Swift Wednesday</label>
+        </fieldset>
+        <fieldset>
+          <input type="checkbox" id="friday" v-model="checked">
+          <label for="checkbox">Swift Friday</label>
+        </fieldset>
+        <fieldset>
+          <input type="checkbox" id="saturday" v-model="checked">
+          <label for="checkbox">Swift Saturday</label>
+        </fieldset>
+        <fieldset>
+          <form action="https://www.swiftyouth.org/">
+            <button :disabled="isInvalidForm" @click="submit()">Submit</button>
+          </form>
+        </fieldset>
+      </div>
+    </main>
+  </div>
+  <script src="https://unpkg.com/vue@2.5.17/dist/vue.js"></script>
+  <script>
 new Vue({
     el: '#app',
     methods: {
       submit: function(){
-        console.log('bla');
-        let url = 'https://bla.com';
+        console.log('submitted');
+        let url = 'https://www.swiftyouth.org/';
         fetch(url, {
           method: 'POST'
         })
@@ -212,12 +213,6 @@ new Vue({
             validForm = false;
           }
 
-          if( /[0-9]{10}/.test(form.phone) ){
-            this.$data.isInvalid.grad_year=false;
-          } else {
-            this.$data.isInvalid.grad_year=true;
-            validForm = false;
-          }
 
           if( /^\d{4}\-\d{2}\-\d{2}$/i.test(form.dob) ){
             this.$data.isInvalid.dob=false;
