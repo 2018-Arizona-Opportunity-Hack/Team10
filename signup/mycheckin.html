@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>simple</title>
+
+  <style scoped>
+    h1, h2 {
+      font-weight: normal;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      display: inline-block;
+      margin: 0 10px;
+    }
+
+    a {
+      color: #35495E;
+    }
+
+    input, select {
+      padding: 2px 5px;
+      box-sizing: content-box;
+      border: 1px solid #b7b7b7;
+      color: #000000;
+      float: left;
+      height: 26px;
+      width: 180px;
+      -webkit-appearance: textfield;
+      background-color: white;
+      -webkit-rtl-ordering: logical;
+      cursor: text;
+      text-rendering: auto;
+      letter-spacing: normal;
+      word-spacing: normal;
+      text-transform: none;
+      text-indent: 0px;
+      text-shadow: none;
+      display: inline-block;
+      text-align: start;
+      margin: 0em;
+    }
+
+    button[disabled] {
+      color: grey;
+      background: red;
+    }
+
+    button {
+      border-radius: 5px;
+      color: #000000;
+      font-size: 20px;
+      font-weight: bold;
+      background: #00EFC5;
+      padding: 20px 25px 20px 25px;
+      text-decoration: none;
+      width: 90%;
+      margin: 0 0 0 15px;
+      transition: all .2s ease-in-out;
+      box-shadow: 0px 0px 0px #2a2a2a;
+
+      align-items: flex-start;
+      text-align: center;
+      cursor: default;
+
+      border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
+      border-style: solid;
+      border-width: 1px;
+
+      letter-spacing: normal;
+      word-spacing: normal;
+      text-transform: none;
+      text-indent: 0px;
+      text-shadow: none;
+      display: inline-block;
+    }
+
+  </style>
+
+</head>
+<body>
+<noscript>
+  This is your fallback content in case JavaScript fails to load.
+</noscript>
+<div id="app">
+  <main style="display: flex; flex-direction: column;">
+    <div><h1>checkin</h1></div>
+    <div style="flex: 1;">
+      <fieldset>
+        <input placeholder="phone number" v-model="form.phone" type="text">
+        <label>phone number</label>
+        <mark
+          v-show="form.phone!=='' && isInvalid.phone"
+        >phone is invalid</mark>
+      </fieldset>
+      <button :disabled="isInvalidForm" @click="submit()">submit</button>
+    </div>
+    <div style="flex: 1;">
+      <pre>
+        {{ $data }}
+      </pre>
+    </div>
+
+  </main>
+
+</div>
+<script src="https://unpkg.com/vue@2.5.17/dist/vue.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    methods: {
+      submit: function(){
+        console.log('bla');
+        let url = 'https://bla.com';
+        fetch(url, {
+          method: 'POST'
+        })
+        .then(()=>{
+
+        });
+      }
+    },
+    watch: {
+      form: {
+        deep: true,
+        handler: function (form) {
+
+          let validForm = true;
+
+          if( /[0-9]{10}/.test(form.phone) ){
+            this.$data.isInvalid.phone=false;
+          } else {
+            this.$data.isInvalid.phone=true;
+            validForm = false;
+          }
+
+          if(validForm) {
+            this.$data.isInvalidForm=false;
+          } else {
+            this.$data.isInvalidForm=true;
+          }
+        }
+      }
+    },
+    data () {
+      return {
+        isInvalidForm: true,
+        isInvalid: {
+          phone: null
+        },
+        form: {
+          phone: ''
+        }
+      }
+    }
+  })
+</script>
+</body>
+</html>
